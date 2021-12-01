@@ -50,13 +50,14 @@ body {
 }
 
 /* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montser, rat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /* topbar */
 .topbar {
     
     position: -webkit-sticky; /* Safari */
     position: sticky;
+    z-index: 99;
     top: 0;
     height: 7vh;
     display: flex;
@@ -67,7 +68,7 @@ body {
     background-color: var(--primary);
     width: 100vw;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.534);
-    border-radius:  0px 20px ;
+    border-radius:  0px 0px 20px 20px ;
 }
 
 ::-webkit-scrollbar{
@@ -409,7 +410,7 @@ body {
 
 .wrapper {
     margin-top: 25vh;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     height: 100%;
     border-radius: 20px;
     display: flex;
@@ -468,8 +469,9 @@ body {
 
 .follow-btn {
     width: max-content;
+    margin-right: 0.5rem;
     /* height: max-content; */
-    padding: 0.1rem 7vw;
+    /* padding: 0.1rem 7vw; */
     /* margin-left: 10px; */
     /* background-color: var(--white); */
     border: 2px solid var(--white);
@@ -499,7 +501,7 @@ body {
     width: 85vw;
     padding: 20px;
     height: 7em;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -522,8 +524,6 @@ body {
 
 .wrapper-post {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -536,11 +536,9 @@ body {
 
 .wrapper-card-post {
     display: flex;
-    align-content: space-around;
-    justify-content: space-between;
-    flex-wrap: wrap;
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 
 }
 
@@ -622,4 +620,5 @@ body {
     justify-content: center;
     bottom: 3em;
     right: 3em;
+    box-shadow: 1px 1px 10px 1px var(--primary)
 }

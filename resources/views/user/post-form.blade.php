@@ -3,6 +3,8 @@
 @section('content')
 <div class="container">
 
+  <x-auth-validation-errors class="mb-4 text-white" :errors="$errors" />
+
     <div class="content-add-edit-post mt-3 ">
         <h2 class="d-flex align-items-center mb-3">Add Post</h2>
 

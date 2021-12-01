@@ -53,4 +53,13 @@ class User extends Authenticatable
     {
         return 'username';
     }
+
+    public function Category(){
+        return $this->BelongsTo(Category::class);
+    }
+
+    public function User(){
+        return $this->BelongsTo(User::class);
+    }
+
 }

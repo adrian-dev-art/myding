@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 
 
@@ -25,7 +29,6 @@ class UserController extends Controller
             'id' => Auth::id(),
         ]);
 
-        // Retrieve the currently authenticated user...
         
     }
 
@@ -59,9 +62,9 @@ class UserController extends Controller
     public function show($id)
     {
         return view('user.profile', [
+            'categories' => Category::get(),
             'user' => User::findorFail($id),
-            // 'post_count' => DB::table('users')->count(),
-            'posts' => DB::table('posts')->where('user_id', $id)->get(),
+            'posts' => Post::where('user_id', $id)->latest()->get(),
         ]);
     }
 
@@ -76,9 +79,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        return view('user.edit-profile', [
+            'user' => User::findorFail($id),
+        ]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -88,7 +94,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user = User::find($id);
+
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            // 'username' => "required|unique:users,username,{$user->id}",
+            'username' => ['required', 'string', 'max:255','unique:users'],
+            'school' => ['required', 'string', 'max:255','nullable'],
+            'organization' => ['required', 'string', 'max:255','nullable'], 
+            'company' => ['required', 'string', 'max:255','nullable'],
+            // 'phone_number' => "required|unique:users,phone_number,{$user->id}",
+            'phone_number' => ['required', 'string'],
+            // 'profile_picture' => ['image', 'file','nullable'],
+            // 'email' => "required|string|email|unique:users,email,{$user->id}",
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        // if ($request->file('profile_picture')) {
+        //     $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile-picture');
+        // }
+
+        
+
+        User::where('id', auth()->user()->id)->update($validatedData);     
+        
+        // return redirect('/');
+
+        return redirect()->route('profile', [Auth::id()])->with('succes', 'Your profile has been Updated');
     }
 
     /**
@@ -99,7 +133,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        
+        // return redirect()->route('profile', [Auth::id()])
+        // ->with('succes', 'Your post has been Deleted');
+
+        return redirect()->back()
+        ->with('succes', 'User has been Deleted');
     }
 
    

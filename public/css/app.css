@@ -11,12 +11,7 @@ Document
 Use a better box model (opinionated).
 */
 
-:root {
-  --primary: #160151;
-  --secondary: #620194;
-  --white: #fff;
-  --black: #000;
-}
+
 
 *,
 ::before,
@@ -87,6 +82,32 @@ Grouping content
 hr {
   height: 0; /* 1 */
   color: inherit; /* 2 */
+}
+
+.table {
+  border-spacing: 0 15px;
+}
+
+i {
+  font-size: 1rem !important;
+}
+
+.table tr {
+  border-radius: 20px;
+}
+
+.mini-icon {
+  height : 20px
+}
+
+tr td:nth-child(n+5),
+tr th:nth-child(n+5) {
+  border-radius: 0 .625rem .625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+  border-radius: .625rem 0 0 .625rem;
 }
 
 /*
@@ -257,9 +278,6 @@ Add the correct vertical alignment in Chrome and Firefox.
 progress {
   vertical-align: baseline;
 }
-
-/* Customize background color */
-
 
 /**
 Correct the cursor style of increment and decrement buttons in Safari.
@@ -15789,16 +15807,6 @@ select {
   background-color: rgba(96, 165, 250, var(--tw-bg-opacity));
 }
 
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: var(--primary);
-}
-
-.bg-secondary {
-  --tw-bg-opacity: 1;
-  background-color: var(--secondary);
-}
-
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
@@ -21290,6 +21298,10 @@ select {
 
 .bg-scroll {
   background-attachment: scroll;
+}
+
+.bg-secondary {
+
 }
 
 .bg-clip-border {

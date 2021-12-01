@@ -21,7 +21,6 @@
           <ul class="top-card-left ">
             <li >
               <a href="/profile/{{$post->user->id}}" >
-                {{-- @dd($post->user->profile_picture) --}}
                 @if ($post->user->profile_picture)
                     <img src="{{asset('storage/'.$post->user->profile_picture)}}" alt="" height="40" width="40" class="rounded-circle">
                 @else
@@ -49,11 +48,8 @@
         </div>
         <!-- Bagian gambar di card -->
         <div class="image-card">
-          @if($post->image)
-          
+          @if($post->image)          
               <img src="{{ asset('storage/'.$post->image)}}" alt="" >
-          @else
-              <img src="/Assets/Images/img-post1.png" alt="">
           @endif
         </div>
         
@@ -92,11 +88,37 @@
               <img src="/Assets/Icons/share-all-outline.png" alt="" />
             </button>
           </li>
+    
+          @if ($post->user->id == auth()->user()->id || auth()->user()->role_id == 3 )
           <li>
+            <div class="btn-group ">
+              <button type="button" class="btn  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="/Assets/Icons/more-btn.png" alt="">
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <ul>
+                  <li>
+                    <a href="/post/{{$post->id}}/edit" class="text-dark text-left">Edit</a>
+                  </li>
+                  <li>
+                    <form action="/post/{{$post->id}}" method="POST">
+                      @method('delete')
+                      @csrf
+                      <button href="btn btn-outline-danger" class="text-dark" onclick="return confirm('are you sure?')" >Delete</button>
+                    </form>
+                  </li>
+          {{-- @else --}}
+              
+          @endif
+         
+
+                </ul>
+              </div>
+            </div>
             
-            <a href="/post/{{$post->id}}/edit/">
+            {{-- <a href="/post/{{$post->id}}/edit/">
               <img src="/Assets/Icons/more-btn.png" alt="">
-            </a>
+            </a> --}}
           </li>
         </ul>
       </div>

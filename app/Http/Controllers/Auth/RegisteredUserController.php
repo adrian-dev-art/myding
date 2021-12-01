@@ -40,8 +40,8 @@ class RegisteredUserController extends Controller
             'school' => ['required', 'string', 'max:255','nullable'],
             'organization' => ['required', 'string', 'max:255','nullable'],
             'company' => ['required', 'string', 'max:255','nullable'],
-            'phone_number' => ['required', 'digits:13'],
-            'profile_picture' => ['image', 'file'],
+            'phone_number' => ['required', 'string'],
+            'profile_picture' => ['image', 'file','nullable'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -50,21 +50,7 @@ class RegisteredUserController extends Controller
             $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile-picture');
         }
 
-        $user = User::create($validatedData);
-
-        // $user = User::create([
-        //     'name' => $request->name,
-        //     'username' => $request->username,
-        //     'school' => $request->school,
-        //     'profile_picture' => $request->profile_picture,
-        //     'company' => $request->company,
-        //     'organization' => $request->organization,
-        //     'phone_number' => $request->phone_number,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        // ]);
-
-        
+        $user = User::create($validatedData);       
 
         event(new Registered($user));
 

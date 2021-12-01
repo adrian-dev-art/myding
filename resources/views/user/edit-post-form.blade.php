@@ -3,10 +3,14 @@
 @section('content')
 <div class="container">
 
-    <div class="content-add-edit-post mt-3 ">
-        <h2 class="d-flex align-items-center mb-3">Add Post</h2>
+  <x-auth-validation-errors class="mb-4 text-white" :errors="$errors" />
 
-        <form action="/post" method="POST" enctype="multipart/form-data">
+
+    <div class="content-add-edit-post mt-3 ">
+        <h2 class="d-flex align-items-center mb-3">Edit Post</h2>
+
+        <form action="/post/{{$post->id}}" method="POST" enctype="multipart/form-data">
+            @method('patch')
             @csrf
             <div class="mb-3 group-input">
               <label for="title" class="form-label">Title</label>
@@ -74,7 +78,7 @@
 
             
          
-            <button type="submit" class="btn btn-primary">Post now</button>
+            <button type="submit" class="btn btn-primary">Edit Post</button>
           </form>
     </div>
   </div>

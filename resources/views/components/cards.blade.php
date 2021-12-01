@@ -1,32 +1,3 @@
-@extends('layouts.main')
-@section('topbar')
-  <x-top-bar-main/>
-@endsection()
-@section('content')
-
-@section('navigation')
-  <x-navigation/>
-@endsection
-
-@section('share')
-          <x-share/>
-@endsection
-
-@section('comment')
-          <x-comment/>
-@endsection
-
-
-<section class="categories container">
-  <a href="/" type="button" class=" btn-sm btn-categories ">All</a>
-  @foreach ($categories as $category)
-  <a href="/categories/{{ $category->name}}" type="button" class=" btn-sm btn-categories">
-    {{ $category->name }}
-  </a>
-  @endforeach
-</section>
-
-
 @foreach ($posts as $post)
 
 <div id="card" class="container d-flex justify-content-center align-items-center">
@@ -68,6 +39,8 @@
       <a href="/post/{{$post->id}}">
         @if($post->image)
             <img src="{{ asset('storage/'.$post->image)}}" alt="" >
+        @else
+            <img src="/Assets/Images/img-post1.png" alt="">
         @endif
       </a>
     </div>
@@ -114,28 +87,3 @@
 
 </div>
 @endforeach
-
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
-<script>
- 
-
-  function react() {
-    var x = document.getElementById("emot")
-    var smile = "/Assets/Icons/emoticon-white.png"
-    var sad = "/Assets/Icons/emoticon-confused-white.png"
-
-    if (x.src == smile) {
-      x.src = sad
-    } else {
-      x.src = smile
-    }
-  }
-</script>
-
-
-@endsection()

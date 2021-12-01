@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\User;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
+
 class PostController extends Controller
 {
     /**
@@ -20,6 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
+
         
         return view('user.index', [
             'user' => User::get(),
@@ -106,10 +108,25 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('user.edit-post-form',[
-            'categories' => Category::get(),
-            'post' => Post::findorFail($id),
-        ]);
+        $post = Post::findorFail($id);
+
+    //     if($post->user->id !== auth()->user()->id || auth()->user()->role_id != 3) {
+    //         abort(403);
+    //    }elseif (auth()->user()->role_id == 3 || $post->user->id == auth()->user()->id) {
+    //        # code...
+    //    }
+
+       if ($post->user->id == auth()->user()->id || auth()->user()->role_id == 3) {
+           return view('user.edit-post-form',[
+               'categories' => Category::get(),
+               'post' => Post::findorFail($id),
+           ]);
+
+       }else{
+           abort(403);
+       }
+       
+
     }
 
     /**
@@ -121,34 +138,66 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $rules = [
-            
+
+        $post = Post::findorFail($id);
+        $validatedData = $request->validate([
             'title' => 'required|max:225',
+            'slug' => "required|unique:posts,slug,{$post->id}",
+            // 'slug' => 'required|unique:posts,slug,$post->id',
             'category_id' => 'required',
             'image' => 'image|file',
             'description' => 'required',
             'place' => 'required',
-        ];
+        ]);
 
-        if ($request->slug != $post->slug) {
-            $rules['slug'] = 'required|unique:posts';
-        }
-
-        
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
-        
-        $validatedData['user_id'] = auth()->user()->id;
-        $validatedData = $request->validate($rules);
-        
-        Post::where('id', $post->id)
+
+        $validatedData['user_id'] = $post->user->id;
+
+        Post::where('id',$post->id)
             ->update($validatedData);
 
+        if(auth()->user()->role_id == 3){
+            return redirect('/dashboard')
+            ->with('succes', 'Post has been Updated');
+
+        }else{
+            return redirect()->route('profile', [Auth::id()])
+            ->with('succes', 'Your post has been Updated');
+        }
+
         
-        return redirect()->route('profile', [Auth::id()])
-        ->with('succes', 'Your post has been Updated');
+
+        // // return $request;
+
+        // $post = Post::findorFail($id);
+        
+        // $rules = [
+        //     'title' => 'required|max:225',
+        //     'category_id' => 'required',
+        //     'image' => 'image|file',
+        //     'slug' => 'required|unique:posts,slug,$post->id',
+        //     'description' => 'required',
+        //     'place' => 'required',
+        // ];
+
+
+
+        // if ($request->file('image')) {
+        //     $validatedData['image'] = $request->file('image')->store('post-images');
+        // }
+        
+        // $user = Auth::id();
+        // $validatedData['user_id'] = $user;
+        // $validatedData = $request->validate($rules);
+        
+        // Post::updateOrCreate($validatedData);
+
+        
+        // return redirect()->route('profile', [Auth::id()])
+        // ->with('succes', 'Your post has been Updated');
 
     }
 
@@ -160,11 +209,34 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
+        
+        // return redirect()->route('profile', [Auth::id()])
+        // ->with('succes', 'Your post has been Deleted');
+
+        if(auth()->user()->role_id == 3){
+            return redirect('/dashboard')
+            ->with('succes', 'Post has been Deleted');
+        }else{
+            return redirect()->route('profile', [Auth::id()])
+            ->with('succes', 'Your post has been Deleted');
+        }
     }
 
     public function checkSlug(Request $request){
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
     }
+    
+    // public function search(){
+    //     return view('user.search');
+    // }
+
+    // public function ResultSearch(Request $request){
+    //     return view('user.search', [
+    //         dd($request('search')),
+    //     ]);
+    // }
+
+    
 }

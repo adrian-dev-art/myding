@@ -24,7 +24,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'role_id' => $this->faker->randomDigitNotNull(),
+            'role_id' => 1,
             'following_count' => $this->faker->randomNumber(),
             'followers_count' => $this->faker->randomNumber(),
             'post_count' => $this->faker->randomNumber(),
