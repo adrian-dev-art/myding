@@ -262,8 +262,11 @@ class HtmlErrorRenderer implements ErrorRendererInterface
      * @param string $file       A file path
      * @param int    $line       The selected line number
      * @param int    $srcContext The number of displayed lines around or -1 for the whole file
+<<<<<<< HEAD
      *
      * @return string
+=======
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      */
     private function fileExcerpt(string $file, int $line, int $srcContext = 3): string
     {

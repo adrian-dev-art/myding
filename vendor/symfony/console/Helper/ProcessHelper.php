@@ -31,8 +31,11 @@ class ProcessHelper extends Helper
      * @param array|Process $cmd      An instance of Process or an array of the command and arguments
      * @param callable|null $callback A PHP callback to run whenever there is some
      *                                output available on STDOUT or STDERR
+<<<<<<< HEAD
      *
      * @return Process
+=======
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      */
     public function run(OutputInterface $output, $cmd, string $error = null, callable $callback = null, int $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE): Process
     {
@@ -95,8 +98,11 @@ class ProcessHelper extends Helper
      * @param array|Process $cmd      An instance of Process or a command to run
      * @param callable|null $callback A PHP callback to run whenever there is some
      *                                output available on STDOUT or STDERR
+<<<<<<< HEAD
      *
      * @return Process
+=======
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      *
      * @throws ProcessFailedException
      *

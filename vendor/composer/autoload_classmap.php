@@ -80,7 +80,10 @@ return array(
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\StoreSearchRequest' => $baseDir . '/app/Http/Requests/StoreSearchRequest.php',
     'App\\Http\\Requests\\UpdateSearchRequest' => $baseDir . '/app/Http/Requests/UpdateSearchRequest.php',
+<<<<<<< HEAD
     'App\\Http\\Resources\\Posts' => $baseDir . '/app/Http/Resources/Posts.php',
+=======
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',

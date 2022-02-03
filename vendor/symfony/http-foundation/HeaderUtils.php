@@ -154,8 +154,11 @@ class HeaderUtils
      *                                 is semantically equivalent to $filename. If the filename is already ASCII,
      *                                 it can be omitted, or just copied from $filename
      *
+<<<<<<< HEAD
      * @return string
      *
+=======
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      * @throws \InvalidArgumentException
      *
      * @see RFC 6266

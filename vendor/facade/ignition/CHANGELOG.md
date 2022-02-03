@@ -2,6 +2,13 @@
 
 All notable changes to `ignition` will be documented in this file
 
+<<<<<<< HEAD
+=======
+## 2.17.3 - 2021-12-23
+
+- allow filtering route parameters using a `toFlare` method
+
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
 ## 2.17.2 - 2021-11-29
 
 ## What's Changed

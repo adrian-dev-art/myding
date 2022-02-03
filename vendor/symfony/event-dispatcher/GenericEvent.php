@@ -148,6 +148,11 @@ class GenericEvent extends Event implements \ArrayAccess, \IteratorAggregate
 
     /**
      * IteratorAggregate for iterating over the object like an array.
+<<<<<<< HEAD
+=======
+     *
+     * @return \ArrayIterator<string, mixed>
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      */
     public function getIterator(): \ArrayIterator
     {

@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -46,6 +47,7 @@ class ErrorListener implements EventSubscriberInterface
     {
         $throwable = $event->getThrowable();
         $logLevel = null;
+<<<<<<< HEAD
         foreach ($this->exceptionsMapping as $class => $config) {
             if ($throwable instanceof $class && $config['log_level']) {
                 $logLevel = $config['log_level'];
@@ -53,6 +55,28 @@ class ErrorListener implements EventSubscriberInterface
             }
         }
 
+=======
+
+        foreach ($this->exceptionsMapping as $class => $config) {
+            if ($throwable instanceof $class && $config['log_level']) {
+                $logLevel = $config['log_level'];
+                break;
+            }
+        }
+
+        foreach ($this->exceptionsMapping as $class => $config) {
+            if (!$throwable instanceof $class || !$config['status_code']) {
+                continue;
+            }
+            if (!$throwable instanceof HttpExceptionInterface || $throwable->getStatusCode() !== $config['status_code']) {
+                $headers = $throwable instanceof HttpExceptionInterface ? $throwable->getHeaders() : [];
+                $throwable = new HttpException($config['status_code'], $throwable->getMessage(), $throwable, $headers);
+                $event->setThrowable($throwable);
+            }
+            break;
+        }
+
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
         $e = FlattenException::createFromThrowable($throwable);
 
         $this->logException($throwable, sprintf('Uncaught PHP Exception %s: "%s" at %s line %s', $e->getClass(), $e->getMessage(), $e->getFile(), $e->getLine()), $logLevel);

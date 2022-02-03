@@ -619,7 +619,10 @@ class ComposerStaticInit5f314d8f7666eb1c893ad577ef14c1af
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\StoreSearchRequest' => __DIR__ . '/../..' . '/app/Http/Requests/StoreSearchRequest.php',
         'App\\Http\\Requests\\UpdateSearchRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateSearchRequest.php',
+<<<<<<< HEAD
         'App\\Http\\Resources\\Posts' => __DIR__ . '/../..' . '/app/Http/Resources/Posts.php',
+=======
+>>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
