@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
+use App\Http\Resources\Posts;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 

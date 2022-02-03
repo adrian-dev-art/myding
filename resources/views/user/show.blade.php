@@ -42,7 +42,7 @@
           <!-- Bagian Kanan Card -->
           <div class="right-card-post">
             <a href={{ url()->previous() }}>
-              <img src="/Assets/Icons/back-btn.png" alt="" />
+              <img src="/Assets/Icons/back-btn.png" alt="" height="20" width="20"/>
             </a>
           </div>
         </div>
