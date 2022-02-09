@@ -47,15 +47,6 @@ class ErrorListener implements EventSubscriberInterface
     {
         $throwable = $event->getThrowable();
         $logLevel = null;
-<<<<<<< HEAD
-        foreach ($this->exceptionsMapping as $class => $config) {
-            if ($throwable instanceof $class && $config['log_level']) {
-                $logLevel = $config['log_level'];
-                break;
-            }
-        }
-
-=======
 
         foreach ($this->exceptionsMapping as $class => $config) {
             if ($throwable instanceof $class && $config['log_level']) {
@@ -76,7 +67,6 @@ class ErrorListener implements EventSubscriberInterface
             break;
         }
 
->>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
         $e = FlattenException::createFromThrowable($throwable);
 
         $this->logException($throwable, sprintf('Uncaught PHP Exception %s: "%s" at %s line %s', $e->getClass(), $e->getMessage(), $e->getFile(), $e->getLine()), $logLevel);
@@ -110,13 +100,6 @@ class ErrorListener implements EventSubscriberInterface
             $prev->setValue($wrapper, $throwable);
 
             throw $e;
-        }
-
-        foreach ($this->exceptionsMapping as $exception => $config) {
-            if ($throwable instanceof $exception && $config['status_code']) {
-                $response->setStatusCode($config['status_code']);
-                break;
-            }
         }
 
         $event->setResponse($response);

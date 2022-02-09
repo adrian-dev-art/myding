@@ -340,7 +340,7 @@ class Process implements \IteratorAggregate
 
         $envPairs = [];
         foreach ($env as $k => $v) {
-            if (false !== $v && 'argc' !== $k && 'argv' !== $k) {
+            if (false !== $v && false === \in_array($k, ['argc', 'argv', 'ARGC', 'ARGV'], true)) {
                 $envPairs[] = $k.'='.$v;
             }
         }
@@ -973,11 +973,6 @@ class Process implements \IteratorAggregate
 
     /**
      * Gets the last output time in seconds.
-<<<<<<< HEAD
-     *
-     * @return float|null
-=======
->>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      */
     public function getLastOutputTime(): ?float
     {
@@ -1496,11 +1491,6 @@ class Process implements \IteratorAggregate
      * @param int  $signal         A valid POSIX signal (see https://php.net/pcntl.constants)
      * @param bool $throwException Whether to throw exception in case signal failed
      *
-<<<<<<< HEAD
-     * @return bool
-     *
-=======
->>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      * @throws LogicException   In case the process is not running
      * @throws RuntimeException In case --enable-sigchild is activated and the process can't be killed
      * @throws RuntimeException In case of failure

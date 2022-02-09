@@ -18,11 +18,5 @@ namespace Symfony\Component\VarDumper\Dumper\ContextProvider;
  */
 interface ContextProviderInterface
 {
-<<<<<<< HEAD
-    /**
-     * @return array|null
-     */
-=======
->>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
     public function getContext(): ?array;
 }

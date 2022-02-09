@@ -27,11 +27,6 @@ interface FragmentUriGeneratorInterface
      * @param bool $absolute Whether to generate an absolute URL or not
      * @param bool $strict   Whether to allow non-scalar attributes or not
      * @param bool $sign     Whether to sign the URL or not
-<<<<<<< HEAD
-     *
-     * @return string
-=======
->>>>>>> a7d9eccf4b14896e4ecddb0f9c0a2f156fa40d7d
      */
     public function generate(ControllerReference $controller, Request $request = null, bool $absolute = false, bool $strict = true, bool $sign = true): string;
 }
